@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="ion-text-center">Recuperar Contraseña</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="recuperarForm" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label position="floating">Nombre de Usuario</ion-label>
+      <ion-input type="text" formControlName="usuario"></ion-input>
+    </ion-item>
+    <div *ngIf="recuperarForm.get('usuario')?.touched && recuperarForm.get('usuario')?.invalid">
+      <p *ngIf="recuperarForm.get('usuario')?.errors?.['required']">El nombre de usuario es requerido.</p>
+    </div>
+
+    <ion-button expand="full" type="submit" [disabled]="recuperarForm.invalid">Recuperar Contraseña</ion-button>
+  </form>
+
+  <!-- Mostrar mensaje de contraseña recuperada o error -->
+  <div *ngIf="mensaje" style="margin-top: 20px; text-align: center;">
+    <p>{{ mensaje }}</p>
+  </div>
+</ion-content>

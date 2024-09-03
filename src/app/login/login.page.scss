@@ -1,0 +1,16 @@
+.animated-title {
+    overflow: hidden; /* Oculta el contenido al principio */
+    white-space: nowrap; /* Evita que el texto se divida en líneas múltiples */
+    width: 0; /* Establece el ancho inicial del título */
+    animation: typing 4s steps(40, end) forwards; /* Define la animación */
+  }
+  
+  @keyframes typing {
+    from {
+      width: 0; /* Comienza con un ancho de 0 */
+    }
+    to {
+      width: 100%; /* Termina con un ancho del 100% del contenedor */
+    }
+  }
+  
