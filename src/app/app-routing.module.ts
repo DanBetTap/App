@@ -29,6 +29,10 @@ const routes: Routes = [
   },  {
     path: 'datos',
     loadChildren: () => import('./datos/datos.module').then( m => m.DatosPageModule)
+  },
+  {
+    path: 'codigosqr',
+    loadChildren: () => import('./codigosqr/codigosqr.module').then( m => m.CodigosqrPageModule)
   }
 
 ];

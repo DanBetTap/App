@@ -16,4 +16,5 @@ export class PrincipalPage implements OnInit {
       this.usuario = params['usuario'] || '';
     });
   }
+
 }

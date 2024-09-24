@@ -1,0 +1,46 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Codigos QR</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding ion-text-center">
+  <!--------Segmento para elegir si escanear o crear qr--------->
+  <ion-segment [(ngModel)]="segment" mode="ios">
+    <ion-segment-button value="scan">
+      <ion-label>Escanear QR</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="generate">
+      <ion-label>Generar QR</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <!------Escanear QR--------------------------->
+  <div *ngIf="segment==='scan'">
+    if segment is equal to scan
+  </div>
+
+  <!------Generar Qr---------------------------->
+  <div class="segment" *ngIf="segment==='generate'">
+    <div class="segment-content">
+      <div id="qrimage">
+        <div class="d-flex-center">
+          <div class="d-flex-center qr-wrapper">
+            <qr-code *ngIf="qrText" [value]="qrText" size="198" errorCorrectionLevel="M"></qr-code>
+            <img *ngIf="!qrText" class="qr-placeholder" src="assets/images/qr.webp">
+          </div>
+        </div>
+      </div>
+      <ion-textarea class="ion-padding-top"
+      label="Escriba algo para hacer su codigo qr"
+      labelPlacement="stacked"
+      fill="outline"
+      [(ngModel)]="qrText"
+      rows="4"
+      [autoGrow]="true"
+      ></ion-textarea>
+
+      
+    </div>
+  </div>
+</ion-content>
