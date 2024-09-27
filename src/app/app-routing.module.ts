@@ -9,6 +9,31 @@ const routes: Routes = [
   },
   {
     path: 'login',
+    redirectTo: 'login',
+    pathMatch: 'full'
+  },
+  {
+    path: 'home',
+    redirectTo: 'home',
+    pathMatch: 'full'
+  },
+  {
+    path: 'home2',
+    redirectTo: 'home2',
+    pathMatch: 'full'
+  },
+  {
+    path: 'principal',
+    redirectTo: 'principal',
+    pathMatch: 'full'
+  },
+  {
+    path: '**',
+    redirectTo: 'e404',
+    pathMatch: 'full'
+  },
+  {
+    path: 'login',
     loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
   },
   {
@@ -26,13 +51,18 @@ const routes: Routes = [
   {
     path: 'principal',
     loadChildren: () => import('./principal/principal.module').then( m => m.PrincipalPageModule)
-  },  {
+  },
+  {
     path: 'datos',
     loadChildren: () => import('./datos/datos.module').then( m => m.DatosPageModule)
   },
   {
     path: 'codigosqr',
     loadChildren: () => import('./codigosqr/codigosqr.module').then( m => m.CodigosqrPageModule)
+  },
+  {
+    path: 'e404',
+    loadChildren: () => import('./e404/e404.module').then( m => m.E404PageModule)
   }
 
 ];
