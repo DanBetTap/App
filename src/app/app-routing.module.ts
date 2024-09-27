@@ -23,6 +23,11 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
+    path: 'codigosqr',
+    redirectTo: 'codigosqr',
+    pathMatch: 'full'
+  },
+  {
     path: 'principal',
     redirectTo: 'principal',
     pathMatch: 'full'
