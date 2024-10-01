@@ -33,6 +33,16 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
+    path: 'recuperar-contrasena',
+    redirectTo: 'recuperar-contrasena',
+    pathMatch: 'full'
+  },
+  {
+    path: 'datos',
+    redirectTo: 'datos',
+    pathMatch: 'full'
+  },
+  {
     path: '**',
     redirectTo: 'e404',
     pathMatch: 'full'
