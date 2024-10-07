@@ -10,10 +10,12 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [AppComponent],  // Agrega tu HomePage
-  imports: [BrowserModule, IonicModule.forRoot({mode: 'md'}), AppRoutingModule, ReactiveFormsModule],
+  imports: [BrowserModule, IonicModule.forRoot({mode: 'md'}), AppRoutingModule, ReactiveFormsModule, HttpClientModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
