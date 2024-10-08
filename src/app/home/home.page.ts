@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { NavController } from '@ionic/angular'; // Importa NavController
+import { NavController, AlertController } from '@ionic/angular'; // Importa NavController
 
 @Component({
   selector: 'app-home',
@@ -9,8 +9,8 @@ import { NavController } from '@ionic/angular'; // Importa NavController
 })
 export class HomePage {
   registerForm: FormGroup;
-
-  constructor(private navCtrl: NavController) {  // Agrega NavController al constructor
+  mensaje: string | null = null;
+  constructor(private navCtrl: NavController, private alertController: AlertController) {  // Agrega NavController al constructor
     this.registerForm = new FormGroup({
       usuario: new FormControl('', [
         Validators.required,
@@ -24,7 +24,7 @@ export class HomePage {
     });
   }
 
-  onSubmit() {
+  async onSubmit() {
     if (this.registerForm.valid) {
       const usuario = this.registerForm.get('usuario')?.value;
       const contrasena = this.registerForm.get('contrasena')?.value;
@@ -33,14 +33,23 @@ export class HomePage {
       localStorage.setItem('usuario', usuario);
       localStorage.setItem('contrasena', contrasena);
 
-      console.log('Usuario y contraseña guardados:', { usuario, contrasena });
-      alert('Usuario y contraseña guardados correctamente.');
+      this.mensaje = 'Registro correcto';
+      await this.mostrarAlerta(this.mensaje);
     } else {
-      console.log('Formulario Inválido');
-      alert('Formulario inválido. Por favor, revisa los campos.');
+      this.mensaje = 'Formulario inválido. Por favor, revisa los campos.';
+      await this.mostrarAlerta(this.mensaje);
     }
   }
 
+  async mostrarAlerta(mensaje: string) {
+    const alert = await this.alertController.create({
+      header: 'Alerta',
+      message: mensaje,
+      buttons: ['Entendido']
+    });
+    await alert.present();
+  }
+  
   goBack() {
     this.navCtrl.back(); // Método para regresar a la página anterior
   }

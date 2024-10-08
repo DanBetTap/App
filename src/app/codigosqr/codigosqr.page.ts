@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-codigosqr',
@@ -10,8 +11,12 @@ export class CodigosqrPage implements OnInit {
   segment = 'generate';
   qrText = '';
 
-  constructor() { }
-
+  constructor(private navCtrl: NavController) {
+    
+   }
+   goBack() {
+    this.navCtrl.back(); // Método para regresar a la página anterior
+  }
   ngOnInit() {
   }
 

@@ -1,6 +1,11 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>datos</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()"> <!-- Botón de "Back" -->
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">Datos</ion-title>
   </ion-toolbar>
 </ion-header>
 

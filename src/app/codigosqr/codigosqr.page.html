@@ -1,6 +1,11 @@
 <ion-header>
-  <ion-toolbar style="text-align: center;">
-    <ion-title>Codigos QR</ion-title>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()"> <!-- Botón de "Back" -->
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">Codigos QR</ion-title>
   </ion-toolbar>
 </ion-header>
 
