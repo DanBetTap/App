@@ -62,6 +62,10 @@
       [autoGrow]="true"
       ></ion-textarea>
 
+      <ion-button (click)="captureScreen()" *ngIf="qrText" class="submit ion-margin-top" expands="block">
+        Compartir
+        <ion-icon slot="end" name="share-social-outline"></ion-icon>
+      </ion-button>
       
     </div>
   </div>
