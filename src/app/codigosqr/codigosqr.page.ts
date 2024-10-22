@@ -3,6 +3,8 @@ import { LoadingController, NavController, Platform } from '@ionic/angular';
 import html2canvas from 'html2canvas';
 import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
 import { Share } from '@capacitor/share';
+import { PocketbaseService } from '../services/pocketbase.service';
+
 
 @Component({
   selector: 'app-codigosqr',
@@ -14,15 +16,26 @@ export class CodigosqrPage implements OnInit {
   segment = 'generate';
   qrText = '';
 
+
   constructor(
     private navCtrl: NavController,
     private loadingControler: LoadingController,
-    private platform: Platform
+    private platform: Platform,
+    private pocketbaseService: PocketbaseService
    ) {
     
    }
    goBack() {
     this.navCtrl.back(); // Método para regresar a la página anterior
+  }
+  saveQrString() {
+    if (this.qrText) {
+      this.pocketbaseService.saveStringToDatabase(this.qrText).then((response) => {
+        console.log('String guardado con éxito:', response);
+      }).catch((error) => {
+        console.error('Error al guardar el string:', error);
+      });
+    }
   }
   ngOnInit() {
   }
