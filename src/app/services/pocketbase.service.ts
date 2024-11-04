@@ -16,4 +16,12 @@ export class PocketbaseService {
     const data = { codigo: codigo };
     return this.pb.collection('codigos_qr').create(data);
   }
+
+  // Funcion para que se guarde un usuario al registrarse
+  async registerUser(usuario: string, contraseña: string){
+    return await this.pb.collection('users').create({
+      usuario: usuario,
+      contraseña: contraseña,
+    })
+  }
 }
