@@ -9,13 +9,13 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <div>
-    <h2 class="padding ion-text-center">Alumnos presentes</h2>
-  </div>
-  <div>
-    <div>
-      Alumno, {{ usuario }}
-    </div>
-  </div>
+<ion-content *ngIf="user">
+  <ion-item>
+    <ion-label>Nombre de usuario</ion-label>
+    <ion-text>{{user.usuerio}}</ion-text>
+  </ion-item>
+</ion-content>
+
+<ion-content *ngIf="!user">
+  <p>Cargando datos del usuario</p>
 </ion-content>

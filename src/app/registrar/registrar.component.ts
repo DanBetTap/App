@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PocketbaseService } from '../services/pocketbase.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-registrar',
@@ -9,17 +10,13 @@ import { PocketbaseService } from '../services/pocketbase.service';
 })
 export class RegistrarComponent  implements OnInit {
   registerForm: FormGroup;
+  usuario: String = '';
+  contraseña: String = ''; 
 
   //usando el constructor para dejar las validaciones de registro de usuario
-  constructor(
-    private fb: FormBuilder,
-    private pocketbaseService: PocketbaseService) {
-      this.registerForm = this.fb.group({
-        usuario: ['', [validators.required, validators.usuario]],
-        contraseña: ['', [validators.required, validators.pattern('^[0-9]{1,4}$')]]// solo numeros
-      })
-    }
+  constructor(private pbService: PocketbaseService, private navCtrl: NavController) {}
 
+  /*
   async onRegister(){
     if(this.registerForm.valid){
       const {usuario, contraseña} = this.registerForm.value;
@@ -31,7 +28,20 @@ export class RegistrarComponent  implements OnInit {
         alert('Error en el registro. Intentelo de nuevo.');
       }
     }
-  }
+  }*/
+
+  /*async onRegister(){
+    if(this.usuario && this.contraseña){
+      try{
+      const user = await this.pbService.registerUser(this.usuario, this.contraseña);
+      console.log('Usuario registrado: ',user);
+      localStorage.setItem('userId',user.id);
+      this.navCtrl.navigateRoot('/datos');
+    }catch(error){
+      console.log('Error al registrar usuario: ',error);
+    }
+    }
+  }*/
 
   ngOnInit() {}
 

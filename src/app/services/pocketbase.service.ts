@@ -18,10 +18,35 @@ export class PocketbaseService {
   }
 
   // Funcion para que se guarde un usuario al registrarse
-  async registerUser(usuario: string, contraseña: string){
+  /*async registerUser(usuario: string, contraseña: string){
     return await this.pb.collection('users').create({
       usuario: usuario,
       contraseña: contraseña,
     })
+  }*/
+
+  async registerUser(usuario: String, contraseña: String): Promise<any>{
+    try{
+      const user = await this.pb.collection('users').create({
+        usuario: usuario,
+        contraseña: contraseña,
+      })
+      return user;
+    }catch(error){
+      console.error('Error al registrar usuario: ',usuario);
+      throw error;
+    }
   }
+
+  async getUserData(userId: string): Promise<any>{
+    try{
+      const user = await this.pb.collection('users').getOne(userId);
+      return user;
+    }catch(error){
+      console.error('Error al obtener datos del usuario: ',error);
+      throw error;
+    }
+  }
+
+
 }
