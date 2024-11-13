@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { NavController, AlertController } from '@ionic/angular'; // Importa NavController
+import { PocketbaseService } from '../services/pocketbase.service';
 
 @Component({
   selector: 'app-home',
@@ -10,38 +11,55 @@ import { NavController, AlertController } from '@ionic/angular'; // Importa NavC
 export class HomePage {
   registerForm: FormGroup;
   mensaje: string | null = null;
-  constructor(private navCtrl: NavController, private alertController: AlertController) {  // Agrega NavController al constructor
-    this.registerForm = new FormGroup({
-      usuario: new FormControl('', [
-        Validators.required,
-        Validators.minLength(3),
-        Validators.maxLength(8),
-      ]),
-      contrasena: new FormControl('', [
-        Validators.required,
-        Validators.pattern('^[0-9]{1,4}$'),
-      ]),
+  nombre: string = '';
+  apellido: string = '';
+  rut: string = '';
+  correo: string = '';
+  tipo: string = ''; // Puede ser 'estudiante' o 'profesor'
+  username: string = '';
+  password: string = '';
+  passwordConfirm: string = '';
+
+  constructor(private fb: FormBuilder, private navCtrl: NavController, private alertController: AlertController, private pocketbaseService: PocketbaseService) {  // Agrega NavController al constructor
+    this.registerForm = this.fb.group({
+      nombre: ['', Validators.required],
+      apellido: ['', Validators.required],
+      rut: ['', Validators.required],
+      correo: ['', [Validators.required, Validators.email]],
+      tipo: ['', Validators.required],
+      username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(8)]],
+      password: ['', [Validators.required, Validators.pattern(/^\d{1,5}$/)]], // solo números de hasta 5 caracteres
+      passwordConfirm: ['', Validators.pattern(/^\d{1,5}$/)], // solo números de hasta 5 caracteres
     });
   }
 
-  async onSubmit() {
+
+
+  saveUser() {
     if (this.registerForm.valid) {
-      const usuario = this.registerForm.get('usuario')?.value;
-      const contrasena = this.registerForm.get('contrasena')?.value;
+      const userData = this.registerForm.value;
+      this.pocketbaseService.createUser(userData).then((response) => {
+        this.mensaje = 'username guardado con éxito';
+        this.mostrarAlerta(this.mensaje);
+        
+      }).catch((error) => {
+        this.mensaje = 'Error al guardar el username: ' , error;
+        this.mostrarAlerta(this.mensaje);
 
-      // Guardar usuario y contraseña en Local Storage
-      localStorage.setItem('usuario', usuario);
-      localStorage.setItem('contrasena', contrasena);
-
-      this.mensaje = 'Registro correcto';
-      await this.mostrarAlerta(this.mensaje);
+      });
     } else {
-      this.mensaje = 'Formulario inválido. Por favor, revisa los campos.';
-      await this.mostrarAlerta(this.mensaje);
+      this.mensaje = 'El formulario es inválido';
+      this.mostrarAlerta(this.mensaje);
+      console.error('El formulario es inválido');
     }
+    console.log(this.registerForm);
+console.log('¿Formulario válido?:', this.registerForm.valid);
   }
+  
 
-  async mostrarAlerta(mensaje: string) {
+
+
+  async mostrarAlerta(mensaje: string) { //quizas tire error porque esta el async, si es asi sacarlo
     const alert = await this.alertController.create({
       header: 'Alerta',
       message: mensaje,
@@ -49,7 +67,8 @@ export class HomePage {
     });
     await alert.present();
   }
-  
+
+
   goBack() {
     this.navCtrl.back(); // Método para regresar a la página anterior
   }

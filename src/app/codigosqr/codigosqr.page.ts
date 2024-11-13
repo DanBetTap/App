@@ -4,6 +4,8 @@ import html2canvas from 'html2canvas';
 import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
 import { Share } from '@capacitor/share';
 
+
+
 @Component({
   selector: 'app-codigosqr',
   templateUrl: './codigosqr.page.html',
@@ -14,16 +16,19 @@ export class CodigosqrPage implements OnInit {
   segment = 'generate';
   qrText = '';
 
+
   constructor(
     private navCtrl: NavController,
     private loadingControler: LoadingController,
-    private platform: Platform
+    private platform: Platform,
+
    ) {
     
    }
    goBack() {
     this.navCtrl.back(); // Método para regresar a la página anterior
   }
+
   ngOnInit() {
   }
 

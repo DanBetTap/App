@@ -21,24 +21,24 @@
     </ion-card-header>
   
     <ion-card-content> 
-      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
         <ion-item>
-          <ion-label position="floating">Usuario</ion-label>
-          <ion-input type="text" formControlName="usuario"></ion-input>
+          <ion-label position="floating">username</ion-label>
+          <ion-input type="text" formControlName="username"></ion-input>
         </ion-item>
-        <div *ngIf="loginForm.get('usuario')?.touched && loginForm.get('usuario')?.invalid">
-          <p *ngIf="loginForm.get('usuario')?.errors?.['required']">Usuario es requerido.</p>
-          <p *ngIf="loginForm.get('usuario')?.errors?.['minlength']">Mínimo 3 caracteres.</p>
-          <p *ngIf="loginForm.get('usuario')?.errors?.['maxlength']">Máximo 8 caracteres.</p>
+        <div *ngIf="loginForm.get('username')?.touched && loginForm.get('username')?.invalid">
+          <p *ngIf="loginForm.get('username')?.errors?.['required']">username es requerido.</p>
+          <p *ngIf="loginForm.get('username')?.errors?.['minlength']">Mínimo 3 caracteres.</p>
+          <p *ngIf="loginForm.get('username')?.errors?.['maxlength']">Máximo 8 caracteres.</p>
         </div>
     
         <ion-item>
           <ion-label position="floating">Contraseña</ion-label>
-          <ion-input type="password" formControlName="contrasena"></ion-input>
+          <ion-input type="password" formControlName="password"></ion-input>
         </ion-item>
-        <div *ngIf="loginForm.get('contrasena')?.touched && loginForm.get('contrasena')?.invalid">
-          <p *ngIf="loginForm.get('contrasena')?.errors?.['required']">Contraseña es requerida.</p>
-          <p *ngIf="loginForm.get('contrasena')?.errors?.['pattern']">Debe contener solo números (máximo 4).</p>
+        <div *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid">
+          <p *ngIf="loginForm.get('password')?.errors?.['required']">Contraseña es requerida.</p>
+          <p *ngIf="loginForm.get('password')?.errors?.['pattern']">Debe contener solo números (máximo 5).</p>
         </div>
     
         <ion-button  expand="full" type="submit" [disabled]="loginForm.invalid">Iniciar Sesión</ion-button>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { PocketbaseService } from '../services/pocketbase.service';
 
 @Component({
   selector: 'app-principal',
@@ -9,12 +10,18 @@ import { ActivatedRoute } from '@angular/router';
 export class PrincipalPage implements OnInit {
   usuario: string = '';
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private pocketBaseService: PocketbaseService) {} // Inyectar el servicio
 
   ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      this.usuario = params['usuario'] || '';
-    });
+    this.obtenerUsuario();
   }
 
+  async obtenerUsuario() {
+    try {
+      const authData = await this.pocketBaseService.getCurrentUser(); 
+      this.usuario = authData.nombre; 
+    } catch (error) {
+      console.error("Error al obtener el usuario:", error);
+    }
+  }
 }
