@@ -18,4 +18,13 @@
       Alumno, {{ usuario }}
     </div>
   </div>
+<ion-content *ngIf="user">
+  <ion-item>
+    <ion-label>Nombre de usuario</ion-label>
+    <ion-text>{{user.usuerio}}</ion-text>
+  </ion-item>
+</ion-content>
+
+<ion-content *ngIf="!user">
+  <p>Cargando datos del usuario</p>
 </ion-content>

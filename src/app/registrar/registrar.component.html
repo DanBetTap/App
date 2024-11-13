@@ -1,0 +1,23 @@
+<p>
+  registrar works!
+</p>
+
+<form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+  <div>
+    <label for="usuario">Usuario</label>
+    <input id="usuario" formControlName="usuario" type="usuario" required/>
+    <div *ngIf="registerForm.get('usuario').invalid && registerForm.get('usuario').touched">
+      <small>Usuario Invalido</small>
+    </div>
+  </div>
+
+  <div>
+    <label for="contraseña">Contraseña (solo numeros)</label>
+    <input id="contraseña" formControlName="contraseña" type="text" required/>
+    <div *ngIf="registerForm.get('contraseña').invalid && registerForm.get('contraseña').touched">
+      <small>La contraseña debe tener solo numeros</small>
+    </div>
+  </div>
+
+  <button type="submit" [disable]="registerForm.invalid">Registrarse</button>
+</form>
