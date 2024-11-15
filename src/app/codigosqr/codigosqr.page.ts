@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { LoadingController, NavController, Platform } from '@ionic/angular';
+import { LoadingController, ModalController, NavController, Platform } from '@ionic/angular';
 import html2canvas from 'html2canvas';
 import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
 import { Share } from '@capacitor/share';
 import { PocketbaseService } from '../services/pocketbase.service';
+import { BarcodeScanningModalComponent } from './barcode-scanning-modal.component';
+import { LensFacing, BarcodeScanner } from '@capacitor-mlkit/barcode-scanning';
 
 
 
@@ -17,19 +19,40 @@ export class CodigosqrPage implements OnInit {
 
   segment = 'generate';
   qrText = '';
+  scanResult = '';
 
 
   constructor(
     private navCtrl: NavController,
     private loadingControler: LoadingController,
     private platform: Platform,
+    private modalController: ModalController,
 
     private pocketbaseService: PocketbaseService
-   ) {
-    
-   }
+   ) {}
    goBack() {
     this.navCtrl.back(); // Método para regresar a la página anterior
+  }
+
+  async startScan() {
+    const modal = await this.modalController.create({
+    component: BarcodeScanningModalComponent,
+    cssClass: 'barcode-scanning-modal',
+    showBackdrop: false,
+    componentProps: {
+      formats: [],
+      lensFacing: LensFacing.Back,
+     }
+    });
+  
+    await modal.present();
+    //Control de lo que se ve al escanear
+    const { data } = await modal.onWillDismiss();
+
+    if(data){
+      this.scanResult = data?.barcode?.displayValue;
+    }
+  
   }
 
   saveQrString() {
@@ -41,7 +64,13 @@ export class CodigosqrPage implements OnInit {
       });
     }
   }
-  ngOnInit() {
+  ngOnInit(): void {
+
+    if(this.platform.is('capacitor')){
+      BarcodeScanner.isSupported().then();
+      BarcodeScanner.checkPermissions().then();
+      BarcodeScanner.removeAllListeners();
+    }
   }
 
   // Captura la imagen para hacerla canva y luego obtener imagen

@@ -8,6 +8,7 @@ import { CodigosqrPageRoutingModule } from './codigosqr-routing.module';
 
 import { CodigosqrPage } from './codigosqr.page';
 import { QrCodeModule } from 'ng-qrcode';
+import { BarcodeScanningModalComponent } from './barcode-scanning-modal.component';
 
 
 @NgModule({
@@ -18,6 +19,6 @@ import { QrCodeModule } from 'ng-qrcode';
     CodigosqrPageRoutingModule,
     QrCodeModule
   ],
-  declarations: [CodigosqrPage]
+  declarations: [CodigosqrPage, BarcodeScanningModalComponent]
 })
 export class CodigosqrPageModule {}
