@@ -15,7 +15,7 @@
     <label for="contraseña">Contraseña (solo numeros)</label>
     <input id="contraseña" formControlName="contraseña" type="text" required/>
     <div *ngIf="registerForm.get('contraseña').invalid && registerForm.get('contraseña').touched">
-      <small>La contraseña debe tener solo numeros</small>
+      <small>La contraseña debe tener exclusivamente numeros</small>
     </div>
   </div>
 
