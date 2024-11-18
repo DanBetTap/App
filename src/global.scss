@@ -50,4 +50,7 @@
   ion-page {
     animation: fadeIn 0.5s ease-in-out;
   }
+  ion-content {
+    --background: linear-gradient(180deg, #ffecd2, #fcb69f); 
+  }
   
