@@ -9,7 +9,7 @@ export class PocketbaseService {
   private pb: PocketBase;
 
   constructor() {
-    this.pb = new PocketBase('http://localhost:8090'); // Cambia la URL si es necesario
+    this.pb = new PocketBase('https://basedatos-9nfw.onrender.com'); // Cambia la URL si es necesario
   }
 
 
@@ -41,11 +41,12 @@ export class PocketbaseService {
       usuario: usuario,
       contraseña: contraseña,
     })
-  }*/
+  }
+
 
   async registerUser(usuario: String, contraseña: String): Promise<any>{
     try{
-      const user = await this.pb.collection('users').create({
+      const user = await this.pb.collection('usuarios').create({
         usuario: usuario,
         contraseña: contraseña,
       })
@@ -58,7 +59,7 @@ export class PocketbaseService {
 
   async getUserData(userId: string): Promise<any>{
     try{
-      const user = await this.pb.collection('users').getOne(userId);
+      const user = await this.pb.collection('usuarios').getOne(userId);
       return user;
     }catch(error){
       console.error('Error al obtener datos del usuario: ',error);
@@ -66,5 +67,5 @@ export class PocketbaseService {
     }
   }
 
-
+*/
 }
