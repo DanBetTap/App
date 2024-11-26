@@ -20,8 +20,11 @@ export class DatosPage implements OnInit {
   goBack() {
     this.navCtrl.back(); // Método para regresar a la página anterior
   }
+  ngOnInit() {
+    //this.loadUserData();
+  }
 
-  async onRegister(){
+/*   async onRegister(){
     if(this.usuario && this.contraseña){
       try{
         const user = await this.pbService.registerUser(this.usuario, this.contraseña);
@@ -34,9 +37,7 @@ export class DatosPage implements OnInit {
     }
   }
 
-  ngOnInit() {
-    this.loadUserData();
-  }
+
 
   async loadUserData(){
     const userId = localStorage.getItem('userId');
@@ -50,6 +51,6 @@ export class DatosPage implements OnInit {
     }else{
       console.log('Usuario no encontrado');
     }
-  }
+  } */
 
 }
